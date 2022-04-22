@@ -1,4 +1,4 @@
-package com.example.digicamp;
+package com.digicamp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
