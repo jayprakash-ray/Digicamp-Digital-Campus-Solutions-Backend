@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@SecurityRequirement(name = "Brain Health Initiative API")
-@Tag(name = "Role", description = "Endpoint to maintain different types of roles present")
 @RequestMapping("/role")
 public class RoleController {
     @Autowired
