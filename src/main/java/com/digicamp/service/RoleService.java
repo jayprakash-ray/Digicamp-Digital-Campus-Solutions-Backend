@@ -17,7 +17,6 @@ public class RoleService {
         try{
             return roleDao.save(role);
         } catch (Exception e){
-
             throw new APIRequestException("A role is already present with name: " + role.getRoleName());
         }
     }
