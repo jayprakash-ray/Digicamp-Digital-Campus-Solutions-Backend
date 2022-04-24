@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.digicamp</groupId>
-    <artifactId>server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>digicamp_application</artifactId>
+    <version>-v1</version>
     <name>server</name>
     <description>server</description>
     <properties>
