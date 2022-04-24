@@ -8,9 +8,9 @@
         <version>2.5.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.healthcare</groupId>
-    <artifactId>server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.digicamp</groupId>
+    <artifactId>digicamp_application</artifactId>
+    <version>-v1</version>
     <name>server</name>
     <description>server</description>
     <properties>
