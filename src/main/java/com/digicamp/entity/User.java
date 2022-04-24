@@ -41,8 +41,9 @@ public class User {
     public User() {
     }
 
-    public User(Integer uuid, String email, String password, Role role) {
+    public User(Integer uuid, Long userId, String email, String password, Role role) {
         this.uuid = uuid;
+        this.userId = userId;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -54,6 +55,14 @@ public class User {
 
     public void setUuid(Integer uuid) {
         this.uuid = uuid;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -84,6 +93,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "uuid=" + uuid +
+                ", userId=" + userId +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
