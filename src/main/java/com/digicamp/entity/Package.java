@@ -139,7 +139,7 @@ public class Package {
                 ", arrivalDate=" + arrivalDate +
                 ", isPicked='" + isPicked + '\'' +
                 ", pickedBy='" + pickedBy + '\'' +
-                ", pickupOn=" + pickedOn +
+                ", pickedOn=" + pickedOn +
                 ", receiverImage='" + receiverImage + '\'' +
                 '}';
     }
