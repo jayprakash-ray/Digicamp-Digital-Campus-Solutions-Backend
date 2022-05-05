@@ -20,7 +20,7 @@ public class PackageService {
             return packageDao.save(pkg);
         } catch (Exception e){
 
-            throw new APIRequestException("A Package is already present with ID: " + pkg.getPid());
+            throw new APIRequestException("A Package is already present with ID: " + pkg.getPackageNumber());
         }
     }
 

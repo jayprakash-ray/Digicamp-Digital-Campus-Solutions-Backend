@@ -13,7 +13,7 @@ public class Package {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @Column(name ="pid")
-    private Integer pid;
+    private Integer packageNumber;
 
     @Column(name ="order_id")
     private String orderId;
@@ -23,10 +23,10 @@ public class Package {
     private String ownerName;
 
     @Column(name = "courier_partner")
-    private String courierPartner;
+    private String courier;
 
     @Column(name = "delivery_date")
-    private Date deliveryDate;
+    private Date arrivalDate;
 
     @Schema(allowableValues = { "Yes", "N0"})
     @Column(name = "is_picked")
@@ -37,32 +37,32 @@ public class Package {
     private String pickedBy;
 
     @Column(name = "pickup_date")
-    private Date pickupDate;
+    private Date pickedOn;
 
     @Column(name = "receiver_image")
-    private Blob receiverImage;
+    private String receiverImage;
 
     public Package() {
     }
 
-    public Package(Integer pid, String orderId, String ownerName, String courierPartner, Date deliveryDate, String isPicked, String pickedBy, Date pickupDate, Blob receiverImage) {
-        this.pid = pid;
+    public Package(Integer packageNumber, String orderId, String ownerName, String courier, Date arrivalDate, String isPicked, String pickedBy, Date pickupOn, String receiverImage) {
+        this.packageNumber = packageNumber;
         this.orderId = orderId;
         this.ownerName = ownerName;
-        this.courierPartner = courierPartner;
-        this.deliveryDate = deliveryDate;
+        this.courier = courier;
+        this.arrivalDate = arrivalDate;
         this.isPicked = isPicked;
         this.pickedBy = pickedBy;
-        this.pickupDate = pickupDate;
+        this.pickedOn = pickupOn;
         this.receiverImage = receiverImage;
     }
 
-    public Integer getPid() {
-        return pid;
+    public Integer getPackageNumber() {
+        return packageNumber;
     }
 
-    public void setPid(Integer pid) {
-        this.pid = pid;
+    public void setPackageNumber(Integer packageNumber) {
+        this.packageNumber = packageNumber;
     }
 
     public String getOrderId() {
@@ -81,20 +81,20 @@ public class Package {
         this.ownerName = ownerName;
     }
 
-    public String getCourierPartner() {
-        return courierPartner;
+    public String getCourier() {
+        return courier;
     }
 
-    public void setCourierPartner(String courierPartner) {
-        this.courierPartner = courierPartner;
+    public void setCourier(String courier) {
+        this.courier = courier;
     }
 
-    public Date getDeliveryDate() {
-        return deliveryDate;
+    public Date getArrivalDate() {
+        return arrivalDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 
     public String getIsPicked() {
@@ -113,34 +113,34 @@ public class Package {
         this.pickedBy = pickedBy;
     }
 
-    public Date getPickupDate() {
-        return pickupDate;
+    public Date getPickupOn() {
+        return pickedOn;
     }
 
-    public void setPickupDate(Date pickupDate) {
-        this.pickupDate = pickupDate;
+    public void setPickupOn(Date pickupOn) {
+        this.pickedOn = pickupOn;
     }
 
-    public Blob getReceiverImage() {
+    public String getReceiverImage() {
         return receiverImage;
     }
 
-    public void setReceiverImage(Blob receiverImage) {
+    public void setReceiverImage(String receiverImage) {
         this.receiverImage = receiverImage;
     }
 
     @Override
     public String toString() {
         return "Package{" +
-                "pid=" + pid +
+                "packageNumber=" + packageNumber +
                 ", orderId='" + orderId + '\'' +
                 ", ownerName='" + ownerName + '\'' +
-                ", courierPartner='" + courierPartner + '\'' +
-                ", deliveryDate=" + deliveryDate +
+                ", courier='" + courier + '\'' +
+                ", arrivalDate=" + arrivalDate +
                 ", isPicked='" + isPicked + '\'' +
                 ", pickedBy='" + pickedBy + '\'' +
-                ", pickupDate=" + pickupDate +
-                ", receiverImage=" + receiverImage +
+                ", pickupOn=" + pickedOn +
+                ", receiverImage='" + receiverImage + '\'' +
                 '}';
     }
 }
