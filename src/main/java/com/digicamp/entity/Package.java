@@ -1,9 +1,12 @@
 package com.digicamp.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 import java.util.Date;
 
@@ -22,39 +25,34 @@ public class Package {
     @Column(name ="owner_name",nullable = false)
     private String ownerName;
 
+    @NotNull
+    @Range(min = 1000000000, max = 9999999999l, message = "Mobile no. must be of 10 digits")
+    @Column(nullable = false, name = "mobile_no")
+    private Long mobileNo;
+
     @Column(name = "courier_partner")
     private String courier;
 
     @Column(name = "delivery_date")
     private Date arrivalDate;
 
-    @Schema(allowableValues = { "Yes", "N0"})
+    @Schema(allowableValues = { "Yes", "No"})
     @Column(name = "is_picked")
     private String isPicked;
 
-    @NotBlank
-    @Column(name ="picked_by",nullable = false)
-    private String pickedBy;
 
-    @Column(name = "pickup_date")
-    private Date pickedOn;
-
-    @Column(name = "receiver_image")
-    private String receiverImage;
 
     public Package() {
     }
 
-    public Package(Integer packageNumber, String orderId, String ownerName, String courier, Date arrivalDate, String isPicked, String pickedBy, Date pickupOn, String receiverImage) {
+    public Package(Integer packageNumber, String orderId, String ownerName, Long mobileNo, String courier, Date arrivalDate, String isPicked) {
         this.packageNumber = packageNumber;
         this.orderId = orderId;
         this.ownerName = ownerName;
+        this.mobileNo = mobileNo;
         this.courier = courier;
         this.arrivalDate = arrivalDate;
         this.isPicked = isPicked;
-        this.pickedBy = pickedBy;
-        this.pickedOn = pickupOn;
-        this.receiverImage = receiverImage;
     }
 
     public Integer getPackageNumber() {
@@ -81,6 +79,14 @@ public class Package {
         this.ownerName = ownerName;
     }
 
+    public Long getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
     public String getCourier() {
         return courier;
     }
@@ -105,42 +111,16 @@ public class Package {
         this.isPicked = isPicked;
     }
 
-    public String getPickedBy() {
-        return pickedBy;
-    }
-
-    public void setPickedBy(String pickedBy) {
-        this.pickedBy = pickedBy;
-    }
-
-    public Date getPickupOn() {
-        return pickedOn;
-    }
-
-    public void setPickupOn(Date pickupOn) {
-        this.pickedOn = pickupOn;
-    }
-
-    public String getReceiverImage() {
-        return receiverImage;
-    }
-
-    public void setReceiverImage(String receiverImage) {
-        this.receiverImage = receiverImage;
-    }
-
     @Override
     public String toString() {
         return "Package{" +
                 "packageNumber=" + packageNumber +
                 ", orderId='" + orderId + '\'' +
                 ", ownerName='" + ownerName + '\'' +
+                ", mobileNo=" + mobileNo +
                 ", courier='" + courier + '\'' +
                 ", arrivalDate=" + arrivalDate +
                 ", isPicked='" + isPicked + '\'' +
-                ", pickedBy='" + pickedBy + '\'' +
-                ", pickedOn=" + pickedOn +
-                ", receiverImage='" + receiverImage + '\'' +
                 '}';
     }
 }
