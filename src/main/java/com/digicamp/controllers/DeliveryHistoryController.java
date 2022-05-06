@@ -1,7 +1,8 @@
 package com.digicamp.controllers;
 
+import com.digicamp.entity.DeliveryHistory;
 import com.digicamp.entity.Package;
-import com.digicamp.service.PackageService;
+import com.digicamp.service.DeliveryHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +12,15 @@ import java.util.List;
 public class DeliveryHistoryController {
 
     @Autowired
-    private PackageService packageService;
+    private DeliveryHistoryService deliveryHistoryService;
 
     @PostMapping("")
-    public Package createPackage(@RequestBody Package pkg){
-        return packageService.createPackage(pkg);
+    public DeliveryHistory createDelivery(@RequestBody DeliveryHistory deliveryHistory){
+        return deliveryHistoryService.createDelivery(deliveryHistory);
     }
 
     @GetMapping("")
-    public List<Package> getAllPackages(){
-        return packageService.getAllPackages();
+    public List<DeliveryHistory> getAllPackages(){
+        return deliveryHistoryService.getAllDeliveryHistory();
     }
 }
