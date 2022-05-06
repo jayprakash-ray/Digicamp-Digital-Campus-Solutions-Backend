@@ -1,15 +1,15 @@
 package com.digicamp.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Entity
 public class DeliveryHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,16 @@ public class DeliveryHistory {
     @Column(nullable = false, name = "mobile_no")
     private Long MobileNo;
 
-    @Column(name = "pickup_date")
+    @Column(name = "pickup_datetime")
     private Date pickedOn;
 
     @Column(name = "receiver_image")
     private String receiverImage;
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @JoinColumn(name = "courier")
+    private Package courier;
 
     public DeliveryHistory(Integer uid, String rollNo, String pickedBy, Long mobileNo, Date pickedOn, String receiverImage) {
         this.uid = uid;
@@ -43,6 +48,10 @@ public class DeliveryHistory {
         MobileNo = mobileNo;
         this.pickedOn = pickedOn;
         this.receiverImage = receiverImage;
+    }
+
+    public DeliveryHistory() {
+
     }
 
     public Integer getUid() {

@@ -16,14 +16,11 @@ public class User {
     private Integer uuid;
 
     @NotNull
-    @Range(min = 100000000000l, max = 999999999999l, message = "User ID must be of 12 digits")
-    @Column(name = "user_id", unique = true, nullable = false)
-    private Long userId;
-
-    @NotNull
     @Email(message = "Email is not valid", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
     @NotEmpty(message = "Email cannot be empty")
-    private String email;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private String userId;
+
 
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -41,10 +38,9 @@ public class User {
     public User() {
     }
 
-    public User(Integer uuid, Long userId, String email, String password, Role role) {
+    public User(Integer uuid, String userId, String password, Role role) {
         this.uuid = uuid;
         this.userId = userId;
-        this.email = email;
         this.password = password;
         this.role = role;
     }
@@ -57,20 +53,12 @@ public class User {
         this.uuid = uuid;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -93,8 +81,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "uuid=" + uuid +
-                ", userId=" + userId +
-                ", email='" + email + '\'' +
+                ", userId='" + userId + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
