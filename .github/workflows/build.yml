@@ -9,14 +9,33 @@ on:
     branches: [ main ]
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: Jay@1998
+          MYSQL_DATABASE: digicampdb
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
+    - name: Create a new .env file
+      run: |
+        touch .env
+        echo DB_CONNECTION=mysql >> .env
+        echo DB_HOST=mysql >> .env
+        echo DB_PORT=3306 >> .env
+        echo DB_DATABASE=digicampdb >> .env
+        echo DB_USERNAME=root >> .env
+        echo DB_PASSWORD=Jay@1998 >> .env  
     - name: Build with Maven
       run: mvn clean install
     - name: Publish to Docker Hub
