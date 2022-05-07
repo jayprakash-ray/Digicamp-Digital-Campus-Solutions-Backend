@@ -12,27 +12,17 @@ public class LostAndFound {
     @Column(name="item_id")
     private Integer itemId;
 
-    @NotBlank
-    @Column(nullable = false)
+
     private String itemName;
 
-    @NotBlank
-    @Column(nullable = false)
     private String foundAt;
 
-    @NotBlank
-    @Column(nullable = false)
     private Date date;
 
-    @NotBlank
-    @Column(nullable = false)
     private String itemImage;
 
-    @NotBlank
-    @Column(nullable = false)
     private String collectFrom;
 
-    @NotBlank
     @Column(nullable = false)
     private int lostOrFound;
 

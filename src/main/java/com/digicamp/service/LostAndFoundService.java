@@ -3,6 +3,7 @@ package com.digicamp.service;
 import com.digicamp.dao.LostAndFoundDao;
 import com.digicamp.entity.LostAndFound;
 import com.digicamp.exception.APIRequestException;
+//import org.jcp.xml.dsig.internal.SignerOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class LostAndFoundService {
     }
 
     public LostAndFound addItem(LostAndFound lostAndFound){
+        System.out.println("lostAndFound: "+lostAndFound);
         try{
             return lostAndFoundDao.save(lostAndFound);
         } catch (Exception e) {
