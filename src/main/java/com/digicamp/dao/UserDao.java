@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 public interface UserDao extends CrudRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.userId=?1")
-    public User findByUserId(Long userId);
+    public User findByUserId(String userId);
 }

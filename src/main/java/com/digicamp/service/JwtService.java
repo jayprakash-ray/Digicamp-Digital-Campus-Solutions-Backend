@@ -32,6 +32,7 @@ public class JwtService implements UserDetailsService {
     private AuthenticationManager authenticationManager;
 
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
+
         String userId = jwtRequest.getUserId();
         String userPassword = jwtRequest.getUserPassword();
         authenticate(userId, userPassword);
@@ -39,13 +40,15 @@ public class JwtService implements UserDetailsService {
         UserDetails userDetails = loadUserByUsername(userId);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-        User user = userDao.findByUserId(Long.parseLong(userId));
+        User user = userDao.findByUserId(userId);
+        System.out.println("userDao" +user);
         return new JwtResponse(user, newGeneratedToken);
     }
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        User user = userDao.findByUserId(Long.parseLong(userId));
+        User user = userDao.findByUserId(userId);
+        System.out.println("User"+user);
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(
                     String.valueOf(user.getUserId()),
@@ -65,10 +68,12 @@ public class JwtService implements UserDetailsService {
 
     private void authenticate(String userId, String userPassword) throws Exception {
         try {
+            System.out.println(userId+"|"+userPassword);
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userId, userPassword));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
+            System.out.println("Bad Cred");
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }

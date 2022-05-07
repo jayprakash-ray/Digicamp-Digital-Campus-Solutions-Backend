@@ -2,6 +2,7 @@ package com.digicamp.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.NumberFormat;
 //import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
@@ -21,6 +22,22 @@ public class User {
     @Column(name = "user_id", unique = true, nullable = false)
     private String userId;
 
+    @NotNull
+    @NotEmpty(message = "Name cannot be empty")
+    private String name;
+
+    @NotNull
+    @NumberFormat(pattern = "[6789][0-9]{9}")
+    @NotEmpty(message = "Mobile number cannot be empty")
+    @Column(unique = true, nullable = false)
+    private String mobile1;
+
+    @NumberFormat(pattern = "[6789][0-9]{9}")
+    private String mobile2;
+
+    @Column(unique = true, nullable = false)
+    @NotEmpty(message = "Roll number cannot be null")
+    private String rollNumber;
 
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -38,11 +55,24 @@ public class User {
     public User() {
     }
 
-    public User(Integer uuid, String userId, String password, Role role) {
+
+    public User(Integer uuid, String userId, String name, String mobile1, String mobile2, String rollNumber, String password, Role role) {
         this.uuid = uuid;
         this.userId = userId;
+        this.name = name;
+        this.mobile1 = mobile1;
+        this.mobile2 = mobile2;
+        this.rollNumber = rollNumber;
         this.password = password;
         this.role = role;
+    }
+
+    public String getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(String rollNumber) {
+        this.rollNumber = rollNumber;
     }
 
     public Integer getUuid() {
@@ -59,6 +89,30 @@ public class User {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMobile1() {
+        return mobile1;
+    }
+
+    public void setMobile1(String mobile1) {
+        this.mobile1 = mobile1;
+    }
+
+    public String getMobile2() {
+        return mobile2;
+    }
+
+    public void setMobile2(String mobile2) {
+        this.mobile2 = mobile2;
     }
 
     public String getPassword() {
@@ -82,6 +136,10 @@ public class User {
         return "User{" +
                 "uuid=" + uuid +
                 ", userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", mobile1='" + mobile1 + '\'' +
+                ", mobile2='" + mobile2 + '\'' +
+                ", rollNumber='" + rollNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';

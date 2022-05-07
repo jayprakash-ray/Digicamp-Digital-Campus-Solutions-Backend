@@ -45,11 +45,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } else {
             System.out.println("JWT token does not start with Bearer");
         }
-
+        System.out.println("User"+ userId);
         if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = jwtService.loadUserByUsername(userId);
-
+            System.out.println("UserDetails"+ userDetails);
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

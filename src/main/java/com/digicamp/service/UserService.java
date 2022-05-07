@@ -24,17 +24,12 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User createUser(User user){
+        System.out.println("User :: "+user);
         Role role = roleDao.findByRoleName(user.getRole().getRoleName());
-        if(role==null) throw new APIRequestException("Invalid role");
-        User user1 = new User();
-        user1.setUserId(user.getUserId());
-        user1.setPassword(getEncodedPassword(user.getPassword()));
-        user1.setRole(role);
-        try {
-            return userDao.save(user1);
-        } catch (Exception e){
-            throw new APIRequestException("A user is already registered with ID: " + user1.getUserId());
-        }
+        user.setRole(role);
+        user.setPassword(getEncodedPassword(user.getPassword()));
+        if(role==null) throw new APIRequestException("Role cannot be NULL");
+        return userDao.save(user);
     }
     public List<User> getAllUsers(){
         List<User> users = (List<User>) userDao.findAll();
@@ -43,7 +38,7 @@ public class UserService {
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
     }
-    public User getUserByUserId(Long userId){
+    public User getUserByUserId(String userId){
         return userDao.findByUserId(userId);
     }
 }
