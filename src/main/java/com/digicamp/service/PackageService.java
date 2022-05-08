@@ -16,17 +16,16 @@ public class PackageService {
     private PackageDao packageDao;
 
     public Package createPackage(Package pkg){
-        try{
-            return packageDao.save(pkg);
-        } catch (Exception e){
-
-            throw new APIRequestException("A Package is already present with ID: " + pkg.getPackageNumber());
-        }
+        return packageDao.save(pkg);
     }
 
     public List<Package> getAllPackages(){
         List<Package> packages = (List<Package>) packageDao.findAll();
         return packages;
+    }
+
+    public Package updatePackage(Package pkg){
+        return packageDao.save(pkg);
     }
 
 }
