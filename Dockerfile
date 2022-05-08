@@ -9,5 +9,5 @@
 # #CMD mvn spring-boot:run
 
 FROM openjdk:8
-ADD  digicamp_application-v1.jar digicamp_application-v1.jar
+ADD  target/digicamp_application-v1.jar digicamp_application-v1.jar
 ENTRYPOINT ["java","-jar","digicamp_application-v1.jar"]
