@@ -25,5 +25,11 @@ public class PackageController {
         return packageService.getAllPackages();
     }
 
+    @PutMapping("")
+    public Package updatePackage(@RequestBody Package pkg){
+        return packageService.updatePackage(pkg);
+    }
+
+
 
 }

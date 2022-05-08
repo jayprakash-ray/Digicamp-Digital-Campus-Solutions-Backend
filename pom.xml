@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.digicamp</groupId>
     <artifactId>digicamp_application</artifactId>
-    <version>-v1</version>
+    <version>v1</version>
     <name>server</name>
     <description>server</description>
     <properties>

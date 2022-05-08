@@ -38,7 +38,7 @@ public class Package {
 
     @Schema(allowableValues = { "Yes", "No"})
     @Column(name = "is_picked")
-    private String isPicked;
+    private String isPicked="No";
 
 
 
