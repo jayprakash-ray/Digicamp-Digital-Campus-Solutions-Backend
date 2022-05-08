@@ -33,14 +33,45 @@ pipeline
                 sh "mvn test"
             }
         }
-         stage('BUILD DOCKER IMAGE') {
-            steps{
-                script {
-                    dockerImage = docker.build registry + ":latest"
-                }
+//          stage('BUILD DOCKER IMAGE') {
+//             steps{
+//                 script {
+//                     dockerImage = docker.build registry + ":latest"
+//                 }
+//             }
+//         }
+        stage('Verify Tooling') {
+            steps {
+                 sh '''
+                    docker version
+                    docker info
+                    docker-compose --version
+                    curl --version
+                    jq --version
+                '''
             }
         }
-                stage('PUSH TO DOCKERHUB') {
+        stage('Prune Docker Data')
+        {
+            steps{
+                sh 'docker system prune -a --volumes -f'
+            }
+        }
+        stage('START Containers')
+        {
+            steps
+            {
+            sh 'docker-compose up -d --no-color --wait'
+            sh 'docker-compose ps'
+            }
+        }
+        stage('Run Tests')
+        {
+            steps{
+                sh 'curl http://localhost:9090 | jq'
+            }
+        }
+         stage('PUSH TO DOCKERHUB') {
                     steps{
                         script {
                             docker.withRegistry( '', registryCredential ) {
