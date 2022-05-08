@@ -62,7 +62,7 @@ pipeline
             steps
             {
             sh 'docker-compose up -d --no-colo --wait'
-            sh 'docker compose ps'
+            sh 'docker-compose ps'
             }
         }
         stage('Run Tests')
