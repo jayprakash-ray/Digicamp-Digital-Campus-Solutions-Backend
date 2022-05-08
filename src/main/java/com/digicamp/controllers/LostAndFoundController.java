@@ -19,6 +19,11 @@ public class LostAndFoundController {
         return lostAndFoundService.getAllItems();
     }
 
+    @GetMapping("/not-collected")
+    public List<LostAndFound> getNotCollectedItems(){
+        return lostAndFoundService.getNotCollectedItems();
+    }
+
     @PostMapping("")
     public LostAndFound addItem(@RequestBody LostAndFound lostAndFound){
         return lostAndFoundService.addItem(lostAndFound);

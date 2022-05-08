@@ -18,6 +18,10 @@ public class LostAndFoundService {
         return (List<LostAndFound>) lostAndFoundDao.findAll();
     }
 
+    public List<LostAndFound> getNotCollectedItems() {
+        return (List<LostAndFound>) lostAndFoundDao.getNotCollectedItems();
+    }
+
     public LostAndFound addItem(LostAndFound lostAndFound){
         System.out.println("lostAndFound: "+lostAndFound);
         try{

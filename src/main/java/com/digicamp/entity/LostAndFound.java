@@ -23,6 +23,16 @@ public class LostAndFound {
 
     private String collectFrom;
 
+    private int isCollected=0;
+
+    public int getIsCollected() {
+        return isCollected;
+    }
+
+    public void setIsCollected(int isCollected) {
+        this.isCollected = isCollected;
+    }
+
     @Column(nullable = false)
     private int lostOrFound;
 
@@ -95,13 +105,14 @@ public class LostAndFound {
 
     public LostAndFound(){}
 
-    public LostAndFound(Integer itemId, String itemName, String foundAt, Date date, String itemImage, String collectFrom, int lostOrFound, String remarks) {
+    public LostAndFound(Integer itemId, String itemName, String foundAt, Date date, String itemImage, String collectFrom, int isCollected, int lostOrFound, String remarks) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.foundAt = foundAt;
         this.date = date;
         this.itemImage = itemImage;
         this.collectFrom = collectFrom;
+        this.isCollected = isCollected;
         this.lostOrFound = lostOrFound;
         this.remarks = remarks;
     }
@@ -115,6 +126,7 @@ public class LostAndFound {
                 ", date=" + date +
                 ", itemImage='" + itemImage + '\'' +
                 ", collectFrom='" + collectFrom + '\'' +
+                ", isCollected=" + isCollected +
                 ", lostOrFound=" + lostOrFound +
                 ", remarks='" + remarks + '\'' +
                 '}';
