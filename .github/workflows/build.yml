@@ -4,9 +4,9 @@ name: Build with Maven and Publish Docker Image to DockerHub
 
 on:
   push:
-    branches: [ main ]
+    branches: [ github_actions ]
   pull_request:
-    branches: [ main ]
+    branches: [ magithub_actions ]
 
 jobs:
 
