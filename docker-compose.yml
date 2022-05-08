@@ -19,7 +19,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/database?autoReconnect=true&useSSL=false
     depends_on:
-      - docker-mysql
+      - mysqldb
 #  app:
 #    depends_on:
 #      - mysqldb
