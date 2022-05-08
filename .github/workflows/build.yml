@@ -1,26 +1,29 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-name: Build with Maven and Publish Docker Image to DockerHub
+# edit For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ github_actions ]
+    branches: [ main ]
   pull_request:
-    branches: [ github_actions ]
+    branches: [ main ]
 
 jobs:
-
   build:
+
     runs-on: ubuntu-latest
+    
     services:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: Jay@1998
           MYSQL_DATABASE: digicampdb
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -37,20 +40,11 @@ jobs:
         echo DB_PORT=3306 >> .env
         echo DB_DATABASE=digicampdb >> .env
         echo DB_USERNAME=root >> .env
-        echo DB_PASSWORD=password >> .env
+        echo DB_PASSWORD=Jay@1998 >> .env
         
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-       
-    - name: checkout repo
-      uses: actions/checkout@v2
       
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1 
-      
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-           
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
@@ -59,3 +53,9 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
