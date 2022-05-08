@@ -16,7 +16,7 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: Jay@1998
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: digicampdb
         ports:
           - 3306:3306
@@ -37,10 +37,13 @@ jobs:
         echo DB_PORT=3306 >> .env
         echo DB_DATABASE=digicampdb >> .env
         echo DB_USERNAME=root >> .env
-        echo DB_PASSWORD=Jay@1998 >> .env
+        echo DB_PASSWORD=password >> .env
         
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: List Files
+      run: ls
        
     - name: checkout repo
       uses: actions/checkout@v2
