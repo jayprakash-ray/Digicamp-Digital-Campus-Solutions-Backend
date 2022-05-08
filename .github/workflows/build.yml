@@ -53,9 +53,3 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
