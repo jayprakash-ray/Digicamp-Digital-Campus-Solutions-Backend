@@ -8,7 +8,7 @@ services:
       - MYSQL_ROOT_PASSWORD=Jay@1998
       - MYSQL_DATABASE=digicampdb
     ports:
-      - "3306:3306"
+      - "3307:3307"
 #      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
@@ -22,9 +22,9 @@ services:
       - "9090:9090"
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://docker-mysql:3306/database?autoReconnect=true&useSSL=false",
-        "spring.datasource.username" : "$MYSQLDB_USER",
-        "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
+        "spring.datasource.url"  : "jdbc:mysql://docker-mysql:3307/database?autoReconnect=true&useSSL=false",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "Jay@1998",
         "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
