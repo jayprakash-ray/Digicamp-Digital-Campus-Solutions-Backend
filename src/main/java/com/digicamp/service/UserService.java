@@ -41,4 +41,10 @@ public class UserService {
     public User getUserByUserId(String userId){
         return userDao.findByUserId(userId);
     }
+
+    public String getEmailByMobile(String mobile){
+        User u1 = userDao.getEmailByMobile1(mobile);
+        User u2 = userDao.getEmailByMobile2(mobile);
+        return u1!=null? u1.getUserId() : u2.getUserId();
+    }
 }

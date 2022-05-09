@@ -4,6 +4,7 @@ import com.digicamp.entity.EmailRequest;
 import com.digicamp.entity.EmailResponse;
 import com.digicamp.entity.OTP;
 import com.digicamp.service.EmailAuthenticationService;
+import com.digicamp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,41 +19,30 @@ import java.util.Random;
 public class EmailAuthenticationController {
     @Autowired
     private EmailAuthenticationService emailService;
-//    private Random rand = new Random();
+    @Autowired
+    private UserService userService;
     private Map<Double, Integer> idToOtp = new HashMap<>();
-
-    //
-//    public String welcome()
-//    {
-//        return "hello this is my email api";
-//    }
-
-    @GetMapping("/{id}/{email}")
+    private int min = 100000;
+    private int max = 999999;
+    @GetMapping("/email/{id}/{email}")
     public String getOTP(@PathVariable double id,@PathVariable String email)
     {
-        int min = 100000;
-        int max = 999999;
-        int otp = (int)Math.floor(Math.random()*(max-min+1)+min);
+        return sendOtpToEmail(id, email);
+    }
 
-        idToOtp.put(id, otp);
-        EmailRequest request = new EmailRequest(email, "OTP", ""+otp);
-        boolean result=this.emailService.sendEmail(request.getMessage(), request.getSubject(), request.getTo());
-        if(result)
-        {
-            System.out.println(request);
-//            return ResponseEntity.ok(new EmailResponse("Email sent successfully."));
+    @GetMapping("/mobile/{id}/{mobile}")
+    public String getOTPByMobile(@PathVariable double id,@PathVariable String mobile)
+    {
+        String email = userService.getEmailByMobile(mobile);
+        if(email==null){
+            return "No email is linked from this number! Please register the email.";
         }
-        else
-        {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new EmailResponse("Email not sent..."));
-        }
-
-        return "";
+        return sendOtpToEmail(id, email);
     }
 
     @PostMapping("")
     public int verifyOTP(@RequestBody OTP body){
-        System.out.println();
+        System.out.println(body.getOtp()+" "+body.getId());
         if(idToOtp.containsKey(body.getId())){
             System.out.println(idToOtp.get(body.getId())+" "+body.getOtp());
             if((int)idToOtp.get(body.getId())==(int)body.getOtp()){
@@ -64,5 +54,13 @@ public class EmailAuthenticationController {
         }else{
             return 2;//"ID not exist";
         }
+    }
+
+    public String sendOtpToEmail(double id, String email){
+        int otp = (int)Math.floor(Math.random()*(max-min+1)+min);
+        idToOtp.put(id, otp);
+        EmailRequest request = new EmailRequest(email, "OTP", ""+otp);
+        boolean result=this.emailService.sendEmail(request.getMessage(), request.getSubject(), request.getTo());
+        return "";
     }
 }
