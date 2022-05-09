@@ -24,7 +24,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User createUser(User user){
-        System.out.println("User :: "+user);
+//        System.out.println("User :: "+user);
         Role role = roleDao.findByRoleName(user.getRole().getRoleName());
         user.setRole(role);
         user.setPassword(getEncodedPassword(user.getPassword()));
