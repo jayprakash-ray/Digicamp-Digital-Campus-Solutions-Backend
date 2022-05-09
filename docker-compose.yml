@@ -13,7 +13,7 @@ services:
     volumes:
       - db:/var/lib/mysql
   app:
-    image: jpray/digicamp:latest
+    image: jpray/digicamp_backend:latest
     depends_on:
       - mysqldb
     build: ./
