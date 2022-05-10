@@ -1,18 +1,28 @@
 ---
-
-- name: run containers
+- name: Pull docker image
   hosts: all
-  become: true
-
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
-  - name: copy docker file
-    copy:
-      src: docker-compose.yml
-      dest: docker-compose.yml
-  - name: list files
-    shell:
-      cmd: ls
-  - name: dockercompose
-    docker_compose:
-      project_src: .
-      state: present
+
+    - name: Remove Docker Container Files
+      shell: docker container prune
+        
+    - name: Pull calculator devops image
+      docker_image:
+        name: jpray/digicamp_backend:latest
+        source: pull
+        
+    - name: copy docker file
+      copy:
+        src: docker-compose.yml
+        dest: docker-compose.yml
+    - name: list files
+      shell:
+        cmd: ls
+    - name: dockercompose
+      docker_compose:
+        project_src: .
+        state: present
+
+...
