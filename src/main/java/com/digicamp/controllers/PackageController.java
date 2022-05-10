@@ -25,6 +25,11 @@ public class PackageController {
         return packageService.getAllPackages();
     }
 
+    @GetMapping("/{id}")
+    public List<Package> getMyPackages(@PathVariable String id){
+        return packageService.getMyPackages(id);
+    }
+
     @PutMapping("")
     public Package updatePackage(@RequestBody Package pkg){
         return packageService.updatePackage(pkg);

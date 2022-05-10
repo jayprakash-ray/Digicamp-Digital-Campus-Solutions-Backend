@@ -15,4 +15,9 @@ public interface UserDao extends CrudRepository<User, Integer> {
 
     @Query("SELECT u from User u WHERE u.mobile2=?1")
     public User getEmailByMobile2(String mobile);
+
+    @Query("SELECT u from User u WHERE u.userId = ?1")
+    public User getMobileByEmail(String email);
+
+
 }
