@@ -38,4 +38,8 @@ public class PackageService {
         return packageDao.save(pkg);
     }
 
+    public void deletePackage(int id){
+        packageDao.deleteById(id);
+    }
+
 }

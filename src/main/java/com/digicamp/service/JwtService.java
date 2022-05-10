@@ -1,10 +1,13 @@
 package com.digicamp.service;
 
+import com.digicamp.controllers.JwtController;
 import com.digicamp.dao.UserDao;
 import com.digicamp.entity.JwtRequest;
 import com.digicamp.entity.JwtResponse;
 import com.digicamp.entity.User;
 import com.digicamp.configuration.JwtUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,6 +24,7 @@ import java.util.Set;
 
 @Service
 public class JwtService implements UserDetailsService {
+    private static final Logger logger = LogManager.getLogger(JwtService.class);
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -41,14 +45,14 @@ public class JwtService implements UserDetailsService {
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
         User user = userDao.findByUserId(userId);
-        System.out.println("userDao" +user);
+//        System.out.println("userDao" +user);
         return new JwtResponse(user, newGeneratedToken);
     }
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         User user = userDao.findByUserId(userId);
-        System.out.println("User"+user);
+//        System.out.println("User"+user);
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(
                     String.valueOf(user.getUserId()),
@@ -56,6 +60,7 @@ public class JwtService implements UserDetailsService {
                     getAuthority(user)
             );
         } else {
+            logger.error("User not found with ID: " + userId);
             throw new UsernameNotFoundException("User not found with ID: " + userId);
         }
     }
@@ -68,12 +73,15 @@ public class JwtService implements UserDetailsService {
 
     private void authenticate(String userId, String userPassword) throws Exception {
         try {
-            System.out.println(userId+"|"+userPassword);
+//            System.out.println(userId+"|"+userPassword);
+
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userId, userPassword));
         } catch (DisabledException e) {
+            logger.error("USER_DISABLED", e);
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            System.out.println("Bad Cred");
+            logger.error("INVALID_CREDENTIALS", e);
+//            System.out.println("Bad Cred");
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }

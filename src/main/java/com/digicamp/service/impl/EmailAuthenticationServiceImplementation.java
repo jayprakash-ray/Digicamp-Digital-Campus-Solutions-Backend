@@ -1,6 +1,9 @@
 package com.digicamp.service.impl;
 
+import com.digicamp.controllers.EmailAuthenticationController;
 import com.digicamp.service.EmailAuthenticationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -13,6 +16,8 @@ import java.util.Properties;
 
     @Service
     public class EmailAuthenticationServiceImplementation implements EmailAuthenticationService {        //this is responsible to send email..
+        private static final Logger logger = LogManager.getLogger(EmailAuthenticationController.class);
+
         @Override
         public boolean sendEmail(String message, String subject, String to) {
             boolean flag=false;
@@ -23,8 +28,9 @@ import java.util.Properties;
 
             //get the system properties
             Properties properties = System.getProperties();
-            System.out.println("PROPERTIES "+properties);
 
+//            System.out.println("PROPERTIES "+properties);
+            logger.info("PROPERTIES "+properties);
             //setting important information to properties object
             //host set
             properties.put("mail.smtp.host", host);
@@ -62,7 +68,8 @@ import java.util.Properties;
                 //Step 3 : send the message using Transport class
                 Transport.send(m);
 
-                System.out.println("Sent success...................");
+//                System.out.println("Sent success...................");
+                logger.info("Sent success...................");
                 flag=true;
             }catch (Exception e) {
                 e.printStackTrace();
@@ -79,6 +86,8 @@ import java.util.Properties;
 
             //get the system properties
             Properties properties = System.getProperties();
+
+            logger.info("PROPERTIES "+properties);
             System.out.println("PROPERTIES "+properties);
 
             //setting important information to properties object
@@ -141,7 +150,8 @@ import java.util.Properties;
             }catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Sent success...................");
+            logger.info("Sent success...................");
+//            System.out.println("Sent success...................");
             return flag;
         }
 

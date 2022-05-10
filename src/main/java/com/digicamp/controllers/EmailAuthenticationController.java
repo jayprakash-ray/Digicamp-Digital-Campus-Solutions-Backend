@@ -5,6 +5,8 @@ import com.digicamp.entity.EmailResponse;
 import com.digicamp.entity.OTP;
 import com.digicamp.service.EmailAuthenticationService;
 import com.digicamp.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import java.util.Random;
 @RestController
 @RequestMapping("/OTP")
 public class EmailAuthenticationController {
+    private static final Logger logger = LogManager.getLogger(EmailAuthenticationController.class);
+
     @Autowired
     private EmailAuthenticationService emailService;
     @Autowired
@@ -27,12 +31,14 @@ public class EmailAuthenticationController {
     @GetMapping("/email/{id}/{email}")
     public String getOTP(@PathVariable double id,@PathVariable String email)
     {
+        logger.info("getOTP called!");
         return sendOtpToEmail(id, email);
     }
 
     @GetMapping("/mobile/{id}/{mobile}")
     public String getOTPByMobile(@PathVariable double id,@PathVariable String mobile)
     {
+        logger.info("getOTPByMobile called!");
         String email = userService.getEmailByMobile(mobile);
         if(email==null){
             return "No email is linked from this number! Please register the email.";
@@ -42,9 +48,10 @@ public class EmailAuthenticationController {
 
     @PostMapping("")
     public int verifyOTP(@RequestBody OTP body){
-        System.out.println(body.getOtp()+" "+body.getId());
+        logger.info("verifyOTP called!");
+//        System.out.println(body.getOtp()+" "+body.getId());
         if(idToOtp.containsKey(body.getId())){
-            System.out.println(idToOtp.get(body.getId())+" "+body.getOtp());
+//            System.out.println(idToOtp.get(body.getId())+" "+body.getOtp());
             if((int)idToOtp.get(body.getId())==(int)body.getOtp()){
                 idToOtp.remove(body.getId());
                 return 0;//"Correct OTP"
