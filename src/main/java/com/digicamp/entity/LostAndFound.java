@@ -1,6 +1,8 @@
 package com.digicamp.entity;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -34,6 +36,7 @@ public class LostAndFound {
     }
 
     @Column(nullable = false)
+    @Schema(allowableValues = { "1", "0"})
     private int lostOrFound;
 
     @Column
