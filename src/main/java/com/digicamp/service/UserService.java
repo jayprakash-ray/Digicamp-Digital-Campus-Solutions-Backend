@@ -24,7 +24,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User createUser(User user){
-        System.out.println("User :: "+user);
+//        System.out.println("User :: "+user);
         Role role = roleDao.findByRoleName(user.getRole().getRoleName());
         user.setRole(role);
         user.setPassword(getEncodedPassword(user.getPassword()));
@@ -40,5 +40,11 @@ public class UserService {
     }
     public User getUserByUserId(String userId){
         return userDao.findByUserId(userId);
+    }
+
+    public String getEmailByMobile(String mobile){
+        User u1 = userDao.getEmailByMobile1(mobile);
+        User u2 = userDao.getEmailByMobile2(mobile);
+        return u1!=null? u1.getUserId() : u2.getUserId();
     }
 }
