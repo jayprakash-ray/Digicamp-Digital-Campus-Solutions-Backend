@@ -29,7 +29,8 @@ public class PackageService {
 
     public List<Package> getMyPackages(String id){
         User user = userDao.getMobileByEmail(id);
-        List<Package> packages = (List<Package>) packageDao.findAllByMobile(Long.parseLong(user.getMobile1()), Long.parseLong(user.getMobile2()));
+        long mob2 = Long.parseLong(user.getMobile2().equals("")?"0":user.getMobile2());
+        List<Package> packages = (List<Package>) packageDao.findAllByMobile(Long.parseLong(user.getMobile1()), mob2);
         return packages;
     }
 
