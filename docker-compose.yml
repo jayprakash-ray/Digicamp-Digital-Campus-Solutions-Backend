@@ -20,7 +20,7 @@ services:
     restart: on-failure
 #     env_file: ./.env
     ports:
-      - "9090:9090"
+      - "9090:80"
     environment:
       SPRING_APPLICATION_JSON: '{
         "spring.datasource.url"  : "jdbc:mysql://docker-mysql:3306/database?autoReconnect=true&useSSL=false",
