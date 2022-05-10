@@ -5,10 +5,10 @@
     ansible_python_interpreter: /usr/bin/python3
   tasks:
 
-    - name: Remove Docker Container Files
-      shell: docker container prune
+#     - name: Remove Docker Container Files
+#       shell: docker rm digicamp_backend:latest
         
-    - name: Pull calculator devops image
+    - name: Pull devops image
       docker_image:
         name: jpray/digicamp_backend:latest
         source: pull
