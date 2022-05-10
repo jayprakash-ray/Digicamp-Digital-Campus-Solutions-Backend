@@ -18,7 +18,7 @@ services:
       - mysqldb
     build: ./
     restart: on-failure
-    env_file: ./.env
+#     env_file: ./.env
     ports:
       - "9090:9090"
     environment:
