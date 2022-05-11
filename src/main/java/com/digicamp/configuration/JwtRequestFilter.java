@@ -2,6 +2,8 @@ package com.digicamp.configuration;
 
 import com.digicamp.service.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +20,7 @@ import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+    private static final Logger logger = LogManager.getLogger(JwtRequestFilter.class);
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -38,18 +41,21 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 userId = jwtUtil.getUserIdFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+                logger.error("Unable to get JWT Token");
+//                System.out.println("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+                logger.error("JWT Token has expired");
+//                System.out.println("JWT Token has expired");
             }
         } else {
-            System.out.println("JWT token does not start with Bearer");
+            logger.info("JWT token does not start with Bearer");
+//            System.out.println("JWT token does not start with Bearer");
         }
-        System.out.println("User"+ userId);
+//        System.out.println("User"+ userId);
         if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = jwtService.loadUserByUsername(userId);
-            System.out.println("UserDetails"+ userDetails);
+//            System.out.println("UserDetails"+ userDetails);
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

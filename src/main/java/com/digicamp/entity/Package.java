@@ -36,9 +36,9 @@ public class Package {
     @Column(name = "delivery_date")
     private Date arrivalDate;
 
-    @Schema(allowableValues = { "Yes", "No"})
+    @Schema(allowableValues = { "1", "0"})
     @Column(name = "is_picked")
-    private String isPicked="No";
+    private String isPicked="0";
 
 
 
