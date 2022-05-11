@@ -1,9 +1,13 @@
 package com.digicamp;
 
+import com.digicamp.dao.RoleDao;
+import com.digicamp.entity.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DigiCampApplication {
@@ -18,4 +22,16 @@ public class DigiCampApplication {
 //        logger.fatal("We've just greeted the user!");
     }
 
+
+    @Bean
+    public CommandLineRunner initialData(RoleDao roleDao) {
+        return args -> {
+            if (!roleDao.existsById(1)) {
+                roleDao.save(new Role("student","Student"));
+            }
+            if (!roleDao.existsById(2)) {
+                roleDao.save(new Role("admin","Admin"));
+            }
+        };
+    }
 }
