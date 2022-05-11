@@ -1,47 +1,52 @@
-version: "3.8"
+version: "3.7"
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
-#     env_file: ./.env
-    environment:
-      - MYSQL_ROOT_PASSWORD=Jay@1998
-      - MYSQL_DATABASE=digicampdb
-    ports:
-      - "3307:3306"
-#      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    volumes:
-      - db:/var/lib/mysql
-      
-  frontend:
+  clientnode:
     image: jpray/digicamp_frontend:latest
-    depends_on:
-      - app
     ports:
-      - 3000:3000
-    container_name: digicamp_frontend
-    command: npm start
-    
-  app:
+      - "8090:4200"
+    networks:
+      net_ubuntu:
+        ipv4_address: 172.28.1.5
+  servernode:
     image: jpray/digicamp_backend:latest
-    depends_on:
-      - mysqldb
-    build: ./
-    restart: on-failure
-#     env_file: ./.env
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
     ports:
       - "9090:9090"
+    depends_on:
+      - "dbnode"
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/digicampdb?autoReconnect=true&useSSL=false",
-        "spring.datasource.username" : "root",
-        "spring.datasource.password" : "Jay@1998",
-        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto" : "update"
-      }'
+      MYSQL_HOST: "dbnode"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "Jay@1998"
+      MYSQL_PORT: "3306"
+    networks:
+      net_ubuntu:
+        ipv4_address: 172.28.1.6
+  dbnode:
+    image: mysql
+    ports:
+      - "3306:3306"
     volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
-volumes:
-  db:
+      - /home/jayprakashray/Documents/projects/DockerCompose/dbnode:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "Jay@1998"
+      MYSQL_DATABASE: "digicampdb"
+      MYSQL_PASSWORD: "Jay@1998"
+    networks:
+      net_ubuntu:
+        ipv4_address: 172.28.1.7
+
+networks:
+  net_ubuntu:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/24
+
+
+
