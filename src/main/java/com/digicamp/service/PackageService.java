@@ -2,8 +2,10 @@ package com.digicamp.service;
 
 import com.digicamp.dao.PackageDao;
 import com.digicamp.dao.RoleDao;
+import com.digicamp.dao.UserDao;
 import com.digicamp.entity.Package;
 import com.digicamp.entity.Role;
+import com.digicamp.entity.User;
 import com.digicamp.exception.APIRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,8 @@ import java.util.List;
 public class PackageService {
     @Autowired
     private PackageDao packageDao;
-
+    @Autowired
+    private UserDao userDao;
     public Package createPackage(Package pkg){
         return packageDao.save(pkg);
     }
@@ -24,8 +27,19 @@ public class PackageService {
         return packages;
     }
 
+    public List<Package> getMyPackages(String id){
+        User user = userDao.getMobileByEmail(id);
+        long mob2 = Long.parseLong(user.getMobile2().equals("")?"0":user.getMobile2());
+        List<Package> packages = (List<Package>) packageDao.findAllByMobile(Long.parseLong(user.getMobile1()), mob2);
+        return packages;
+    }
+
     public Package updatePackage(Package pkg){
         return packageDao.save(pkg);
+    }
+
+    public void deletePackage(int id){
+        packageDao.deleteById(id);
     }
 
 }
