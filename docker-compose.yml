@@ -12,6 +12,16 @@ services:
 #      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
+      
+  frontend:
+    image: jpray/digicamp_frontend:latest
+    depends_on:
+      - app
+    ports:
+      - 3000:3000
+    container_name: digicamp_frontend
+    command: npm start
+    
   app:
     image: jpray/digicamp_backend:latest
     depends_on:
