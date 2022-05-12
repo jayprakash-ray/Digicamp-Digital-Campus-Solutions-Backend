@@ -68,7 +68,7 @@ public class EmailAuthenticationController {
         idToOtp.put(id, otp);
         
         String name = Character.toUpperCase(email.split("\\.")[0].charAt(0)) + email.split("\\.")[0].substring(1).toLowerCase();
-        String message= "Welcome " + name + "to DigiCamp.\n Your OTP is: " + otp + "\n Please don't share this OTP with anyone. \n Thanks and Regards \n Team DigiCamp \n IIITB" ;
+        String message= "Welcome to DigiCamp " +name+ "\n\nYour OTP is: " + otp + "\nPlease don't share this OTP with anyone. \n\nThanks and Regards\n Team DigiCamp\nIIIT Bangalore" ;
         EmailRequest request = new EmailRequest(email, "IIITB DigiCamp OTP", message);
         
         boolean result=this.emailService.sendEmail(request.getMessage(), request.getSubject(), request.getTo());
