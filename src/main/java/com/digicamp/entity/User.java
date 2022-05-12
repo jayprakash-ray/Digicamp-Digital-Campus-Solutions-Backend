@@ -67,6 +67,18 @@ public class User {
         this.role = role;
     }
 
+    public User(String userId, String name, String mobile1, String mobile2, String rollNumber, String password, Role role) {
+        this.userId = userId;
+        this.name = name;
+        this.mobile1 = mobile1;
+        this.mobile2 = mobile2;
+        this.rollNumber = rollNumber;
+        this.password = password;
+        this.role = role;
+    }
+
+
+
     public String getRollNumber() {
         return rollNumber;
     }
