@@ -3,11 +3,13 @@ D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\dao\Us
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\service\RoleService.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\dao\RoleDao.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\configuration\WebSecurityConfiguration.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\service\impl\EmailAuthenticationServiceImplementation.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\service\PackageService.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\dao\LostAndFoundDao.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\RoleController.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\configuration\CorsConfiguration.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\entity\DeliveryHistory.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\service\EmailAuthenticationService.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\PackageController.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\JwtController.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\LostAndFoundController.java
@@ -23,8 +25,12 @@ D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\servic
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\exception\APIException.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\configuration\JwtAuthenticationEntryPoint.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\DigiCampApplication.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\entity\EmailRequest.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\exception\APIExceptionHandler.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\EmailAuthenticationController.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\dao\PackageDao.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\entity\EmailResponse.java
+D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\entity\OTP.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\exception\APIRequestException.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\DeliveryHistoryController.java
 D:\Sem-2\SPE\Digicamp-Digital-Campus-Solutions\src\main\java\com\digicamp\controllers\UserController.java
