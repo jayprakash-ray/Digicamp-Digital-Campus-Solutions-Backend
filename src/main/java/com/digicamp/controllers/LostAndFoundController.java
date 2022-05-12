@@ -44,7 +44,7 @@ public class LostAndFoundController {
     @PutMapping("/{id}")
     public LostAndFound updateItem(@RequestBody LostAndFound lostAndFound, @PathVariable int id){
         logger.info("updateItem called!");
-        lostAndFound.setLostOrFound(id);
+        lostAndFound.setItemId(id);
         return lostAndFoundService.updateItem(lostAndFound);
     }
 
