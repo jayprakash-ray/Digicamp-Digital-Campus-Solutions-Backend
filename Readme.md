@@ -5,7 +5,7 @@ DigiCamp  - “Digital Campus Solutions”
 
 Motivation:
 Problem 1:
-Hundreds of delivery/couriers/packages arrive on campus every day which are first received at the security gates. Currently the security guard has to manually make an entry into its notebook registers of each delivery/courier/packages and when students get time they visit the reception and collect their packages after signing their entries. In this process , we have observed that there is wastage of paper and time. Also there is no guarantee that the person who is receiving the order is the right person as current process does not ensure authenticity of identity as anyone can take anyone’s package by spoofing signature because there is no proper audit maintained of who received the order to track if someone intentionally/unintentionally collects incorrect package.
+Hundreds of delivery/couriers/packages arrive on campus every day which are first received at the security gates. Currently the security guard has to manually make an entry into its notebook registers of each delivery/courier/packages and when students get time they visit the reception and collect their packages after signing their entries. In this process , we have observed that there is wastage of paper and time. Also there is no guarantee that the person who is receiving the order is the right person as current process does not ensure authenticity of identity as anyone can take anyone’s package by spoofing signature because there is no proper audit maintained of who received the order to track if someone intentionally/unintentionally collects incorrect package
 
 
 Problem 2:	
